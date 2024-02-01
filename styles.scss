@@ -1,0 +1,641 @@
+$green: #80c0a1;
+$yellow: #F5FCCD;
+$red: #ff7d66;
+$brown: #ff7d66;
+$black: #000038;
+$white: #FFF;
+$pink: #eb80b1;
+$blue: #419197;
+$light-blue: #78D6C6;
+$dark-blue: #12486B;
+$orange: orange;
+$light-grey: #bdc3c6;
+$grey: #919ea3;
+$dark-grey: #66777F;
+
+$duration: 0.3s;
+$timingFunction: ease;
+
+@function iterate($selector, $n) {
+  $var: '';
+
+  @for $i from 0 to $n {
+    $var: append($var, $selector);
+  }
+  @return $var;
+}
+
+html {
+  font-size: 10px;
+  @media screen and (min-height: 350px) {
+		font-size: 11px;
+	}
+  @media screen and (min-height: 400px) {
+		font-size: 12px;
+	}
+  @media screen and (min-height: 500px) {
+		font-size: 14px;
+	}
+  @media screen and (max-width: 767px) {
+		font-size: 10px;
+	}
+  @media screen and (max-width: 450px) {
+		font-size: 8px;
+	}
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: $yellow;
+  overflow: hidden;
+}
+
+.stands {
+  $component-class: &;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__text {
+    position: absolute;
+    top: 1rem;
+    left: 1.6rem;
+    width: 30rem;
+    color: $green;
+    font-size: 3rem;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    &:before,
+    &:after {
+      content: 'Do the wave';
+      position: absolute;
+    }
+    &:before {
+      left: -0.3rem;
+      color: $blue;
+    }
+    &:after {
+      left: -0.6rem;
+      color: $dark-blue;
+    }
+  }
+  &__items-wrapper {
+    position: relative;
+    top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 105rem;
+    &:before {
+      content: '';
+      position: absolute;
+      top: -22rem;
+      left: -50%;
+      width: 200%;
+      height: 20rem;
+      background: linear-gradient($white -200%, $light-blue);
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -21.8rem;
+      left: -50%;
+      width: 200%;
+      height: 20rem;
+      background: linear-gradient($black -200%, $green);
+    }
+  }
+  &__item {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    padding: 0 0.1rem;
+    list-style: none;
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      bottom: -1.8rem;
+      left: 0;
+      width: 100%;
+      height: 5rem;
+      background: linear-gradient($light-blue, $grey);
+    }
+    &:hover,
+    &:has( + li:is(:hover, :focus-within)),
+    &:is(:hover, :focus-within) + li,
+    // Previous row:
+    &:has( #{iterate(+ li, 20)}:is(:hover, :focus-within)),
+    // Next row:
+    &:is(:hover, :focus-within) #{iterate(+ li, 20)} {
+      #{$component-class}__character {
+        top: -40%;
+      }
+      #{$component-class}__body {
+        height: 70%;
+      }
+      #{$component-class}__legs {
+        top: 80%;
+      }
+      #{$component-class}__leg {
+        top: 0;
+        height: 4rem;
+        border-radius: 0;
+      }
+      div#{$component-class}__mouth {
+        top: 75%;
+        left: calc(50% - 0.15rem);
+        width: 0.3rem;
+        height: 0.3rem;
+        border-radius: 50%;
+        background: radial-gradient(circle at 50% 100%, $red 40%, $black 40%, $black);
+        border: none;
+      }
+    }
+    &:hover {
+      #{$component-class}__arm {
+        transform: scaleY(-1.2);
+      }
+    }
+    &:has( + li:is(:hover, :focus-within)),
+    &:is(:hover, :focus-within) + li,
+    // Previous row:
+    &:has( #{iterate(+ li, 20)}:is(:hover, :focus-within)),
+    // Next row:
+    &:is(:hover, :focus-within) #{iterate(+ li, 20)} {
+      #{$component-class}__arm {
+        transform: scaleY(-1);
+      }
+    }
+    &:has( #{iterate(+ li, 2)}:is(:hover, :focus-within)),
+    &:is(:hover, :focus-within) #{iterate(+ li, 2)},
+    // Previous row:
+    &:has( #{iterate(+ li, 19)}:is(:hover, :focus-within)),
+    &:has( #{iterate(+ li, 21)}:is(:hover, :focus-within)),
+    &:has( #{iterate(+ li, 40)}:is(:hover, :focus-within)),
+    // Next row:
+    &:is(:hover, :focus-within) #{iterate(+ li, 19)},
+    &:is(:hover, :focus-within) #{iterate(+ li, 21)},
+    &:is(:hover, :focus-within) #{iterate(+ li, 40)} {
+      #{$component-class}__character {
+        top: -20%;
+      }
+      #{$component-class}__body {
+        height: 75%;
+      }
+      #{$component-class}__arm {
+        transform: scaleY(-0.6);
+      }
+      #{$component-class}__legs {
+        top: 85%;
+      }
+      #{$component-class}__leg {
+        top: 0;
+        height: 3rem;
+        border-radius: 0;
+      }
+    }
+    &:has( #{iterate(+ li, 3)}:is(:hover, :focus-within)),
+    &:is(:hover, :focus-within) #{iterate(+ li, 3)},
+    // Previous row:
+    &:has( #{iterate(+ li, 18)}:is(:hover, :focus-within)),
+    &:has( #{iterate(+ li, 22)}:is(:hover, :focus-within)),
+    &:has( #{iterate(+ li, 39)}:is(:hover, :focus-within)),
+    &:has( #{iterate(+ li, 41)}:is(:hover, :focus-within)),
+    // Next row:
+    &:is(:hover, :focus-within) #{iterate(+ li, 18)},
+    &:is(:hover, :focus-within) #{iterate(+ li, 22)},
+    &:is(:hover, :focus-within) #{iterate(+ li, 39)},
+    &:is(:hover, :focus-within) #{iterate(+ li, 41)} {
+      #{$component-class}__character {
+        top: -10%;
+      }
+      #{$component-class}__body {
+        height: 70%;
+      }
+      #{$component-class}__arm {
+        transform: scaleY(0.6);
+      }
+      #{$component-class}__legs {
+        top: 75%;
+      }
+      #{$component-class}__leg {
+        top: 0;
+        height: 3rem;
+        border-radius: 0;
+      }
+    }
+    &:has( + li:is(:hover, :focus-within)),
+    &:has( + li + li:is(:hover, :focus-within)),
+    &:has( #{iterate(+ li, 21)}:is(:hover, :focus-within)),
+    &:is(:hover, :focus-within) #{iterate(+ li, 19)} {
+      #{$component-class}__body {
+        transform: skewX(-5deg);
+      }
+    }
+    &:is(:hover, :focus-within) + li,
+    &:is(:hover, :focus-within) + li + li,
+    &:has( #{iterate(+ li, 19)}:is(:hover, :focus-within)),
+    &:is(:hover, :focus-within) #{iterate(+ li, 21)} {
+      #{$component-class}__body {
+        transform: skewX(5deg);
+      }
+    }
+    // Stylizing characters: shirt
+    &:nth-child(8n + 2) {
+      #{$component-class}__body {
+        background: linear-gradient($green, $black 300%);
+        &:before {
+          display: none;
+        }
+      }
+      #{$component-class}__arm {
+        background: linear-gradient($green, $black 200%);
+      }
+    }
+    &:nth-child(6n + 2) {
+      #{$component-class}__body {
+        background: linear-gradient($orange, $black 300%);
+        &:before {
+          display: none;
+        }
+      }
+      #{$component-class}__arm {
+        background: linear-gradient($orange, $black 200%);
+      }
+    }
+    &:nth-child(13n + 6) {
+      #{$component-class}__body {
+        background: linear-gradient($blue, $black 300%);
+        &:before {
+          display: none;
+        }
+      }
+      #{$component-class}__arm {
+        background: linear-gradient($blue, $black 200%);
+      }
+    }
+    &:nth-child(12n) {
+      #{$component-class}__body {
+        background: linear-gradient($white, $black 300%);
+        &:before {
+          display: none;
+        }
+      }
+      #{$component-class}__arm {
+        background: linear-gradient($white, $black 200%);
+      }
+    }
+    &:nth-child(14n) {
+      #{$component-class}__body {
+        background: linear-gradient($pink, $black 300%);
+        &:before {
+          display: none;
+        }
+      }
+      #{$component-class}__arm {
+        background: linear-gradient($pink, $black 200%);
+      }
+    }
+    // Stylizing characters: legs
+    &:nth-child(4n) {
+      #{$component-class}__legs {
+        background-color: $grey;
+      }
+      #{$component-class}__leg {
+        background: linear-gradient($white -400%, $grey);
+      }
+    }
+    &:nth-child(4n + 2) {
+      #{$component-class}__legs {
+        background-color: $dark-grey;
+      }
+      #{$component-class}__leg {
+        background: linear-gradient($white -400%, $dark-grey);
+      }
+    }
+    &:nth-child(4n + 3) {
+      #{$component-class}__legs {
+        background-color: $blue;
+      }
+      #{$component-class}__leg {
+        background: linear-gradient($white -400%, $blue);
+      }
+    }
+    &:nth-child(3n) {
+      #{$component-class}__leg {
+        &:after {
+          background: linear-gradient($white -400%, $black);
+        }
+      }
+    }
+    // Stylizing characters: hair
+    &:nth-child(6n) {
+      #{$component-class}__hair {
+        left: 25%;
+        width: 50%;
+        height: 30%;
+        background: linear-gradient($white -400%, $brown);
+      }
+      #{$component-class}__face {
+        &:after {
+          width: 80%;
+          height: 40%;
+          background: linear-gradient($white -400%, $brown);
+        }
+      }
+    }
+    &:nth-child(6n + 1) {
+      #{$component-class}__hair {
+        left: 25%;
+        width: 50%;
+        height: 30%;
+        background: linear-gradient($white -400%, $black);
+      }
+      #{$component-class}__face {
+        &:after {
+          width: 100%;
+          height: 20%;
+          border-radius: 50% 50% 0 0;
+          background: linear-gradient($white -400%, $black);
+        }
+      }
+    }
+    &:nth-child(6n + 2) {
+      #{$component-class}__hair {
+        top: -25%;
+        left: 25%;
+        width: 50%;
+        height: 30%;
+        background: linear-gradient($white -400%, $dark-grey);
+      }
+      #{$component-class}__face {
+        &:after {
+          display: none;
+        }
+      }
+    }
+    &:nth-child(6n + 4) {
+      #{$component-class}__hair {
+        left: 25%;
+        width: 50%;
+        height: 30%;
+        background: linear-gradient($white -400%, $orange);
+      }
+      #{$component-class}__face {
+        &:after {
+          border-radius: 50%;
+          background: linear-gradient($white -400%, $orange);
+        }
+      }
+    }
+    &:nth-child(6n + 5) {
+      #{$component-class}__hair {
+        display: none;
+      }
+      #{$component-class}__face {
+        &:after {
+          display: none;
+        }
+      }
+    }
+    // Stylizing characters: face
+    &:nth-child(8n) {
+      #{$component-class}__face {
+        background: radial-gradient($yellow -100%, $red 200%);
+        &:before {
+          background: linear-gradient(90deg, $yellow -50%, lighten($red, 10%), $yellow 150%);
+        }
+      }
+    }
+    // Stylizing characters: eyes
+    &:nth-child(3n) {
+      #{$component-class}__eyes {
+        &:before,
+        &:after {
+          background: radial-gradient(circle at 0 0, $white -200%, $dark-blue);
+        }
+      }
+    }
+    &:nth-child(7n) {
+      #{$component-class}__eyes {
+        &:before,
+        &:after {
+          background-color: $blue;
+        }
+      }
+    }
+    // Stylizing characters: nose
+    &:nth-child(3n) {
+      #{$component-class}__nose {
+        left: calc(50% - 0.15rem);
+        width: 0.3rem;
+      }
+    }
+    // Stylizing characters: mouth
+    &:nth-child(4n) {
+      #{$component-class}__mouth {
+        width: 30%;
+      }
+    }
+    &:nth-child(4n + 2) {
+      #{$component-class}__mouth {
+        width: 20%;
+        left: 40%;
+      }
+    }
+  }
+  &__chair {
+    width: 100%;
+    height: 100%;
+    background-color: $dark-blue;
+    border-radius: 1rem;
+    box-shadow: 0 -0.5rem 2rem 0 rgba($black, 0.8);
+    &:before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: 5%;
+      width: 90%;
+      height: 80%;
+      border-radius: 1rem;
+      border-bottom: 2px solid $blue;
+      background: linear-gradient(transparent, $black 200%);
+    }
+  }
+  &__character {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: top $duration $timingFunction;
+  }
+  &__body {
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    width: 60%;
+    height: 55%;
+    border-radius: 1.25rem 1.25rem 0 0;
+    background: linear-gradient($red, $black 300%);
+    transition-property: height, transform;
+    transition-duration: $duration;
+    transition-timing-function: $timingFunction;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 1.2rem;
+      right: 0.6rem;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: $white;
+    }
+  }
+  &__arm {
+    position: absolute;
+    top: 15%;
+    width: 30%;
+    height: 3rem;
+    background: linear-gradient($red, $black 200%);
+    transform-origin: 50% 0.5rem;
+    transition: transform $duration $timingFunction;
+    &:nth-child(1) {
+      left: -20%;
+      border-radius: 1rem 0 0 0;
+    }
+    &:nth-child(2) {
+      right: -20%;
+      border-radius: 0 1rem 0 0;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -1rem;
+      width: 100%;
+      height: 1rem;
+      border-radius: 0 0 50% 50%;
+      background: linear-gradient($yellow, $red 200%);
+    }
+  }
+  &__legs {
+    position: absolute;
+    top: 70%;
+    left: 20%;
+    width: 60%;
+    height: 20%;
+    border-radius: 0 0 1rem 1rem;
+    background-color: $dark-blue;
+    transition: top $duration $timingFunction;
+  }
+  &__leg {
+    position: absolute;
+    top: -30%;
+    width: 45%;
+    height: 3rem;
+    background: linear-gradient($white -400%, $dark-blue);
+    border-radius: 1rem 1rem 0 0;
+    transition-property: height, border-radius;
+    transition-duration: $duration;
+    transition-timing-function: $timingFunction;
+    &:nth-child(1) {
+      left: 0;
+    }
+    &:nth-child(2) {
+      right: 0;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      width: 100%;
+      height: 1rem;
+      border-radius: 40% 40% 10% 10%;
+      background: linear-gradient($brown, $black 300%);
+    }
+  }
+  &__hair {
+    position: absolute;
+    top: -35%;
+    left: 20%;
+    width: 60%;
+    height: 40%;
+    border-radius: 50% 50% 0 0;
+    background: linear-gradient($white -400%, $black);
+  }
+  &__face {
+    position: absolute;
+    top: -30%;
+    left: 27.5%;
+    width: 45%;
+    height: 50%;
+    border-radius: 45% 45% 50% 50%;
+    background: radial-gradient(circle at center, $yellow, $red 200%);
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: -0.4rem;
+      left: 25%;
+      width: 50%;
+      height: 0.5rem;
+      border-radius: 0 0 1rem 1rem;
+      background: linear-gradient(90deg, $red -50%, $yellow, $red 150%);
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: -5%;
+      left: 0;
+      width: 100%;
+      height: 30%;
+      border-radius: 50% 50% 0 50%;
+      background: linear-gradient($white -400%, $black);
+    }
+  }
+  &__eyes {
+    position: absolute;
+    top: 35%;
+    left: 20%;
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    height: 20%;
+    &:before,
+    &:after {
+      content: '';
+      width: 0.3rem;
+      height: 0.3rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at 0 0, $white -200%, $black);
+    }
+  }
+  &__nose {
+    position: absolute;
+    top: 40%;
+    left: calc(50% - 0.25rem);
+    justify-content: center;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 0 0 50% 50%;
+    border-bottom: 2px solid $brown;
+    border-right: 1px solid $brown;
+  }
+  &__mouth {
+    position: absolute;
+    top: 60%;
+    left: 30%;
+    justify-content: center;
+    width: 40%;
+    height: 0.5rem;
+    border-radius: 50%;
+    border-bottom: 1px solid $black;
+    transition-property: left, width;
+    transition-duration: $duration;
+    transition-timing-function: $timingFunction;
+  }
+} 
